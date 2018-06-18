@@ -10,3 +10,12 @@ pipeline:
       - pex salt mysql -c salt-master -o salt-master.pex
       - pex salt mysql -c salt-minion -o salt-minion.pex
       - pex salt mysql -c salt-api -o salt-api.pex
+
+  github_release:
+    image: plugins/github-release
+    secrets: [ github_token ]
+    files: *.pex
+    checksum:
+      - sha256
+    when:
+      event: tag
