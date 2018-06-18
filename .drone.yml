@@ -14,7 +14,7 @@ pipeline:
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
-    files: *.pex
+    files: "*.pex"
     checksum:
       - sha256
     when:
