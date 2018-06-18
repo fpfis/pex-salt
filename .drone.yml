@@ -1,0 +1,10 @@
+pipeline:
+  build:
+    image: centos:7
+    commands:
+      - mkdir build
+      - pip install pex
+      - pex salt -c salt-master -o build/salt-master.pex
+      - pex salt -c salt-minion -o build/salt-minion.pex
+      - pex salt -c salt-api -o build/salt-api.pex
+      - ls -lha build/
