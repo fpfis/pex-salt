@@ -2,7 +2,9 @@ pipeline:
   build:
     image: centos:7
     commands:
-      - mkdir build
+      - yum install -y epel-release
+      - yum group install -y "Development Tools" 
+      - yum install -y python-pip
       - pip install pex
       - pex salt -c salt-master -o build/salt-master.pex
       - pex salt -c salt-minion -o build/salt-minion.pex
