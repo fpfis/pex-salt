@@ -10,6 +10,8 @@ pipeline:
       - pex salt mysql -c salt-master -o salt-master.pex
       - pex salt mysql -c salt-minion -o salt-minion.pex
       - pex salt mysql -c salt-api -o salt-api.pex
+      - pex salt mysql -c salt-call -o salt-call.pex
+      - pex salt mysql -c salt -o salt.pex
       - ./salt-minion.pex --version
 
   github_release:
