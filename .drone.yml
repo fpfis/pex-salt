@@ -7,11 +7,11 @@ pipeline:
       - yum install -y mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
-      - pex salt mysql -c salt-master -o salt-master.pex
-      - pex salt mysql -c salt-minion -o salt-minion.pex
-      - pex salt mysql -c salt-api -o salt-api.pex
-      - pex salt mysql -c salt-call -o salt-call.pex
-      - pex salt mysql -c salt -o salt.pex
+      - pex salt mysql-python python-gnupg -c salt-master -o salt-master.pex
+      - pex salt mysql-python python-gnupg -c salt-minion -o salt-minion.pex
+      - pex salt mysql-python python-gnupg -c salt-api -o salt-api.pex
+      - pex salt mysql-python python-gnupg -c salt-call -o salt-call.pex
+      - pex salt mysql-python python-gnupg -c salt -o salt.pex
       - ./salt-minion.pex --version
 
   github_release:
