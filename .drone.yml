@@ -12,6 +12,7 @@ pipeline:
       - pex salt mysql-python python-gnupg -c salt-api -o salt-api.pex
       - pex salt mysql-python python-gnupg -c salt-call -o salt-call.pex
       - pex salt mysql-python python-gnupg -c salt -o salt.pex
+      - pex salt mysql-python python-gnupg -c salt-key -o salt-key.pex
       - ./salt-minion.pex --version
 
   github_release:
