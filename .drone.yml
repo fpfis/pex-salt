@@ -7,20 +7,30 @@ pipeline:
       - yum install -y mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
-      - pex salt mysql-python python-gnupg -c salt-master -o salt-master.pex
-      - pex salt mysql-python python-gnupg -c salt-minion -o salt-minion.pex
-      - pex salt mysql-python python-gnupg -c salt-api -o salt-api.pex
-      - pex salt mysql-python python-gnupg -c salt-call -o salt-call.pex
-      - pex salt mysql-python python-gnupg -c salt -o salt.pex
-      - pex salt mysql-python python-gnupg -c salt-key -o salt-key.pex
-      - pex salt mysql-python python-gnupg -c salt-ssh -o salt-ssh.pex
-      - ./salt-minion.pex --version
+      - pex salt mysql-python python-gnupg -c salt-master -o salt-master
+      - pex salt mysql-python python-gnupg -c salt-minion -o salt-minion
+      - pex salt mysql-python python-gnupg -c salt-api -o salt-api
+      - pex salt mysql-python python-gnupg -c salt-call -o salt-call
+      - pex salt mysql-python python-gnupg -c salt -o salt
+      - pex salt mysql-python python-gnupg -c salt-key -o salt-key
+      - pex salt mysql-python python-gnupg -c salt-ssh -o salt-ssh
+      - ./salt-minion --version
 
-  github_release:
+
+
+  github-release:
     image: plugins/github-release
     secrets: [ github_token ]
-    files: "*.pex"
+    files: "salt*"
     checksum:
       - sha256
+    when:
+      event: tag
+
+  build-and-push-docker:
+    image: plugins/docker
+    repo: fpfis/salt-pex
+    secrets: [ DOCKER_USERNAME, DOCKER_PASSWORD ]
+    auto_tag: true
     when:
       event: tag
