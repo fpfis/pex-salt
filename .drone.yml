@@ -34,3 +34,12 @@ pipeline:
     auto_tag: true
     when:
       event: tag
+
+  build-and-push-docker:
+    image: plugins/docker
+	repo: registry.fpfis.tech.ec.europa.eu/salt-pex
+    secrets: [ DOCKER_USERNAME, DOCKER_PASSWORD ]
+    auto_tag: true
+    when:
+      event: [ push, tag ]
+      branch: master
