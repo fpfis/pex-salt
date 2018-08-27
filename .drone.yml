@@ -35,7 +35,7 @@ pipeline:
     when:
       event: tag
 
-  build-and-push-docker:
+  build-and-push-private-docker:
     image: plugins/docker
     repo: registry.fpfis.tech.ec.europa.eu/salt-pex
     secrets: [ DOCKER_USERNAME, DOCKER_PASSWORD ]
