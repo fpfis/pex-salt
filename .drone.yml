@@ -3,8 +3,9 @@ pipeline:
     image: centos:7
     commands:
       - yum install -y epel-release
+      - yum search gitlib2 && exit 1
       - yum group install -y "Development Tools" 
-      - yum install -y gcc libffi-devel mysql-devel gmp-devel python-devel python-pip
+      - yum install -y gcc git-devel libffi-devel mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
       - pex salt mysql-python python-gnupg pygit2 -c salt-master -o salt-master
