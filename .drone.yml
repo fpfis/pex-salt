@@ -7,13 +7,13 @@ pipeline:
       - yum install -y libgit2-devel gcc libffi-devel mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
-      - pex salt mysql-python python-gnupg pygit2 -c salt-master -o salt-master
-      - pex salt mysql-python python-gnupg pygit2 -c salt-minion -o salt-minion
-      - pex salt mysql-python python-gnupg pygit2 -c salt-api -o salt-api
-      - pex salt mysql-python python-gnupg pygit2 -c salt-call -o salt-call
-      - pex salt mysql-python python-gnupg pygit2 -c salt -o salt
-      - pex salt mysql-python python-gnupg pygit2 -c salt-key -o salt-key
-      - pex salt mysql-python python-gnupg pygit2 -c salt-ssh -o salt-ssh
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-master -o salt-master
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-minion -o salt-minion
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-api -o salt-api
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-call -o salt-call
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt -o salt
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-key -o salt-key
+      - pex salt mysql-python python-gnupg pygit2-0.26.4 -c salt-ssh -o salt-ssh
       - ./salt-minion --version
 
   github-release:
