@@ -4,16 +4,16 @@ pipeline:
     commands:
       - yum install -y epel-release
       - yum group install -y "Development Tools" 
-      - yum install -y libgit2-devel gcc libffi-devel mysql-devel gmp-devel python-devel python-pip
+      - yum install -y libssh2 python-pygit2 mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-master -o salt-master
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-minion -o salt-minion
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-api -o salt-api
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-call -o salt-call
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt -o salt
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-key -o salt-key
-      - pex salt mysql-python python-gnupg pygit2==0.26.4 -c salt-ssh -o salt-ssh
+      - pex salt mysql-python python-gnupg -c salt-master -o salt-master
+      - pex salt mysql-python python-gnupg -c salt-minion -o salt-minion
+      - pex salt mysql-python python-gnupg -c salt-api -o salt-api
+      - pex salt mysql-python python-gnupg -c salt-call -o salt-call
+      - pex salt mysql-python python-gnupg -c salt -o salt
+      - pex salt mysql-python python-gnupg -c salt-key -o salt-key
+      - pex salt mysql-python python-gnupg -c salt-ssh -o salt-ssh
       - ./salt-minion --version
 
   github-release:
@@ -31,7 +31,8 @@ pipeline:
     secrets: [ DOCKER_USERNAME, DOCKER_PASSWORD ]
     auto_tag: true
     when:
-      event: tag
+      event: [ push, tag ]
+      branch: master
 
   build-and-push-private-docker:
     image: plugins/docker
