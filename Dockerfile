@@ -5,5 +5,5 @@ RUN apk del libressl-dev && apk add --no-cache openssl-dev g++ && \
     pip --no-cache-dir install pycrypto && \
     apk del openssl-dev g++ && apk add --no-cache libressl-dev && \
     apk add --no-cache --virtual .build-deps g++ libffi-dev libssh2-dev libgit2-dev musl-dev mariadb-dev  && \
-    pip --no-cache-dir install pygit2 mysql-python python-gnupg salt && \
+    pip --no-cache-dir install 'tornado<5.0,>=4.2.1' pygit2 mysql-python python-gnupg salt && \
     apk del .build-deps
