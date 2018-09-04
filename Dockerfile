@@ -1,4 +1,4 @@
-FROM python:2.7-alpine
+FROM python:2.7-alpine3.7
 # Install required libs
 RUN apk add --no-cache --virtual .run-deps libffi libgit2 libssh2 mariadb-common gcc
 RUN apk del libressl-dev && apk add --no-cache openssl-dev g++ && \
