@@ -7,6 +7,7 @@ pipeline:
       - yum install -y libssh2 python-pygit2 mysql-devel gmp-devel python-devel python-pip
       - pip install --upgrade pip
       - pip install pex
+      - pex salt mysql-python python-gnupg -c salt-run -o salt-run
       - pex salt mysql-python python-gnupg -c salt-master -o salt-master
       - pex salt mysql-python python-gnupg -c salt-minion -o salt-minion
       - pex salt mysql-python python-gnupg -c salt-api -o salt-api
