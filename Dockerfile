@@ -1,10 +1,8 @@
-FROM alpine:3.7
+FROM ubuntu:bionic 
 # Install required libs
-RUN apk add --no-cache py-pip && pip install --no-cache-dir --upgrade pip
-RUN apk add --no-cache --virtual .run-deps git libffi libgit2 libssh2 mariadb-client-libs gcc
-RUN apk del --no-cache libressl-dev && apk add --no-cache openssl-dev g++ python-dev &&\
-    pip --no-cache-dir install pycrypto && \
-    apk del --no-cache openssl-dev g++ && apk add --no-cache libressl-dev && \
-    apk add --no-cache --virtual .build-deps python-dev g++ libffi-dev libssh2-dev libgit2-dev musl-dev mariadb-dev  && \
-    pip --no-cache-dir install 'tornado<5.0,>=4.2.1' 'pygit2==0.25' MySQL-python python-gnupg cherrypy salt && \
-    apk del --no-cache .build-deps python-dev
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y git libffi6 libgit2-26 libssh2-1 libmariadbclient18 python-pkg-resources && \
+    apt-get install --no-install-recommends -y python-setuptools python-pip python-dev libffi-dev libgit2-dev libmariadbd-dev libssh2-1-dev gcc && \
+    pip --no-cache-dir install 'tornado<5.0,>=4.2.1' 'pygit2==0.26' MySQL-python python-gnupg cherrypy salt && \
+    apt-get autoremove -y  python-setuptools python-dev libffi-dev libgit2-dev libmariadbd-dev libssh2-1-dev gcc --purge && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
